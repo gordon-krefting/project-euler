@@ -9,7 +9,6 @@
 # Evaluate the sum of all the amicable numbers under 10000.
 
 def d(n)
-	# more effecient algorithm?
 	sum = 1
 	(2..Math.sqrt(n)).each do |factor|
 		if (n % factor == 0)
