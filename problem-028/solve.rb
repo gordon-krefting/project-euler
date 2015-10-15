@@ -15,8 +15,8 @@
 def solve(n)
 	total = 1
 	(3...n+1).step(2) do |x|
-		subtotal = 4*x**2 - 6*x + 6
-		total += subtotal
+		# Upper right corner is x**, the other corners are each x-1 less. Simplify and we've got:
+		total += 4*x**2 - 6*x + 6
 	end
 	return total
 end
