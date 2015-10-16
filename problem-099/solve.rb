@@ -30,4 +30,4 @@ max_index = -1
 	#puts "#{pairs[i][0]}^#{pairs[i][1]}"
 end
 
-puts "Line: #{max_index}"
+puts "Line: #{max_index+1}"

@@ -18,10 +18,13 @@ t0 = Time.now
 
 (3..100000).each do |n|
 	is_prime(n)
+	puts n
 end
 
 t1 = Time.now
 puts t1-t0
+
+exit
 
 (3..100000).each do |n|
 	$primes.include? n
