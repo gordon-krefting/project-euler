@@ -28,8 +28,8 @@ def incrementor(i = 1)
 	end
 end
 
+# better algorithm?
 def is_nine_digit_pandigital(n)
-	# len = 9 && sum digits = 45
 	s = n.to_s
 	if s.length != 9
 		return false
