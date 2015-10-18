@@ -39,4 +39,6 @@ filename = dirname + "/solve.rb"
 
 File.write(filename, o)
 
-FileUtils.chmod "-x", filename
+FileUtils.chmod "+x", filename
+
+`open #{filename}`
