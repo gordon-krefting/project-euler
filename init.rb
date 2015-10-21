@@ -31,7 +31,9 @@ if o.length == 0
 	exit
 end
 
-o = "#!/usr/bin/env ruby\n\n#{o}\n\nputs \"Output\""
+dashes = "# ---------------------------------------------------------------------------------------------------------------------"
+
+o = "#!/usr/bin/env ruby\n#{dashes}\n#{o}#\n#{dashes}\nputs \"Output\""
 
 Dir.mkdir(dirname)
 
