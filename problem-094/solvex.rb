@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # ---------------------------------------------------------------------------------------------------------------------
 # It is easily proved that no equilateral triangle exists with integral length sides and integral area. However,
-# the almost equilateral triangle 5-5-6 has an area of 12 square units.
+# the almost eIsosceles Heronian trianglesquilateral triangle 5-5-6 has an area of 12 square units.
 # 
 # We shall define an almost equilateral triangle to be a triangle for which two sides are equal and the third differs
 # by no more than one unit.
@@ -15,32 +15,44 @@
 #   https://en.wikipedia.org/wiki/Integer_triangle#Isosceles_Heronian_triangles
 #   https://en.wikipedia.org/wiki/Coprime_integers#Generating_all_coprime_pairs
 #   http://forum.projecteuler.net/viewtopic.php?f=16&t=928
+require_relative "../lib/incrementor.rb"
+require "logger"
 
+$log = Logger.new STDOUT
+$log.level = Logger::DEBUG
+$log.datetime_format = '%Y-%m-%d %H:%M:%S%z '
 
+limit = 1000000000
 
-def test(m,n,&block)
-	if (m > 20000)
-		return
-	end
-
-	yield(m,n)
-	test(2*m - n, m, &block)
-	test(2*m + n, m, &block)
-	#if (n != 1)
-	#test(m + 2*n, n, &block)
-	#end
-end
-
-test(3,1) do |m,n|
-	puts "#{m},#{n}"
-	a = 2 * (m**2 - n**2)
-	b = m**2 + n**2
-
-	#puts a + b + b
-
-	if (a + 1 == b || b + 1 == a)	
-		puts " -> #{a}, #{b}, #{b}"
-	end
+# All the triangles we want are "Isosceles Heronian triangles"
+def is_heronian(a, b, c)
+	#$log.debug("Checking #{a}, #{b}, #{c}")
+	return false
 end
 
 
+Incrementor.new(3).each do |a|
+	b = a - 1
+	c = a - 1
+
+	if is_heronian(a,b,c)
+		puts "h"
+	end
+
+	perimeter = a + b + c
+
+	if perimeter % 1000000 == 0
+		$log.debug perimeter
+	end
+
+	if (perimeter > limit)
+		break
+	end
+	
+	b = a + 1
+	c = a + 1
+	if is_heronian(a,b,c)
+		puts "h"
+	end
+
+end
