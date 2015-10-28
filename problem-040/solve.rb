@@ -14,6 +14,8 @@
 #
 # ---------------------------------------------------------------------------------------------------------------------
 # Ugh in Ruby Math.log(1000) != 3, it equals 2.99999996, hence the horrible fudge (+ 0.01) in length calc
+# 
+# Using string concat is much easier, but very slow. What's the best way?
 
 require_relative "../lib/incrementor.rb"
 require_relative "../lib/util.rb"
