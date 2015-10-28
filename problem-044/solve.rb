@@ -10,4 +10,43 @@
 # D = |Pk − Pj| is minimised; what is the value of D?
 #
 # ---------------------------------------------------------------------------------------------------------------------
-puts "Output"
+require "set"
+
+class PentagonalGenerator
+	attr_accessor :n, :pentagonals
+	def initialize(limit)
+		@n = 1
+		@limit = limit
+		@pentagonals = Set.new
+	end
+
+	def each
+		while @n <= @limit
+			pentagonal = @n * (3 * @n - 1) / 2
+			@pentagonals.add pentagonal
+			yield pentagonal
+			@n += 1
+		end
+	end
+end
+ 
+
+generator = PentagonalGenerator.new(5000)
+
+# for each p, we're checking to see if we can find pk + pj = p
+# if we do, we check that pk - pj is pentagonal
+generator.each do |p|
+	generator.pentagonals.each do |pk|
+		pj = p - pk
+		if generator.pentagonals.include? pj
+			diff = pk - pj
+			if generator.pentagonals.include? diff
+				puts diff
+				exit
+			end
+
+		end
+	end
+end
+
+
