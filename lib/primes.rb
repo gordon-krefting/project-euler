@@ -4,6 +4,8 @@
 # ---------------------------------------------------------------------------------------------------------------------
 
 class Primes
+	attr_accessor :primes
+	
 	def initialize(size)
 		@primes = [nil, nil, *2..size]
   		(2..Math.sqrt(size)).each do |i|
