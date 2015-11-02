@@ -31,9 +31,10 @@ if o.length == 0
 	exit
 end
 
+# build the solve file
 dashes = "# ---------------------------------------------------------------------------------------------------------------------"
 
-o = "#!/usr/bin/env ruby\n#{dashes}\n#{o}#\n#{dashes}\nputs \"Output\""
+o = "#!/usr/bin/env ruby\n#{dashes}\n#{o}#\n#{dashes}\nif __FILE__ == $0\n\nend"
 
 Dir.mkdir(dirname)
 
@@ -42,5 +43,24 @@ filename = dirname + "/solve.rb"
 File.write(filename, o)
 
 FileUtils.chmod "+x", filename
+
+# build the test file
+o = @text = <<END
+#!/usr/bin/env ruby
+
+require_relative "solve"
+require "test/unit"
+ 
+class TestSolve < Test::Unit::TestCase
+
+end
+END
+testfilename = dirname + "/tc_solve.rb"
+
+File.write(testfilename, o)
+
+FileUtils.chmod "+x", testfilename
+
+
 
 `open #{filename}`
