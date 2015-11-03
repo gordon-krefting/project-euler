@@ -9,14 +9,15 @@ end
 
 
 class Incrementor
-	def initialize(start)
+	def initialize(start, step=1)
 		@i = start
+		@step = step
 	end
 
 	def each
 		while true
 			yield @i
-			@i = @i + 1
+			@i = @i + @step
 		end
 	end
 end
