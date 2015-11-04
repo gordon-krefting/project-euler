@@ -9,6 +9,7 @@ end
 
 
 class Incrementor
+
 	def initialize(start, step=1)
 		@i = start
 		@step = step
