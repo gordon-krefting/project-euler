@@ -37,18 +37,6 @@
 
 require "../lib/primes"
 
-def gcd(a,b)
-  if a < b 
-    temp = a
-    a = b
-    b = temp
-  end
-  if a % b == 0
-    return b
-  end
-  return gcd(a%b, b)
-end
-
 $primes = Primes.new(200000)
 
 def φ(n)
@@ -58,21 +46,6 @@ def φ(n)
   }
   return f
 end
-
-
-
-
-def φ2(n)
-  count = 0
-  (1..n-1).each{|a|
-    if gcd(n,a) == 1
-      count += 1
-    end
-  }
-  return(count);
-end
-
-
 if __FILE__ == $0
 
   max_f = 0.0
