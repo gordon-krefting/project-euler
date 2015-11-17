@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
 
-
-
 # sum the results of an operation
 puts (1..10).reduce(0) {|sum, n|
   sum += n*3
@@ -11,3 +9,9 @@ puts (1..10).reduce(0) {|sum, n|
 puts (1..10).map {|n|
   n*3
 }.reduce(:+)
+
+
+# make a hash from a loop. (In this case, a lookup of digits to their factorials)
+puts (0..9).each_with_object({}) { |n, map|
+  map[n] = n==0 ? 1 : n * map[n-1]
+}
