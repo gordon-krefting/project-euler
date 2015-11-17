@@ -15,3 +15,13 @@ puts (1..10).map {|n|
 puts (0..9).each_with_object({}) { |n, map|
   map[n] = n==0 ? 1 : n * map[n-1]
 }
+
+# Reduce a map
+# In this case, we're counting all the entries where the val is 1
+results = { 'x' => 1, 'y' => 2, 'z' => 1}
+puts results.reduce(0) {|sum, (key, value)|
+  if value == 1
+    sum += 1
+  end
+  sum
+}
