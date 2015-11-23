@@ -25,3 +25,8 @@ puts results.reduce(0) {|sum, (key, value)|
   end
   sum
 }
+
+# Find in array (reverse!)
+[4,3,1,1,1].rindex {|i|
+  i > 1
+}
