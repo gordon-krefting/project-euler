@@ -6,7 +6,12 @@ import "strings"
 import "log"
 
 func main() {
-	fmt.Println(ReadMatrix("../testmatrix.txt"))
+	matrix := ReadMatrix("../testmatrix.txt")
+	fmt.Println(matrix)
+	fmt.Println("-----")
+	for i, row := range matrix {
+		fmt.Printf("%v -> %s\n", i, row)
+	}
 }
 
 func ReadMatrix(filename string) [][]string {
