@@ -1,3 +1,4 @@
 euler.sublime*
 *.swp
-
+target/
+Cargo.lock
