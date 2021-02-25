@@ -25,7 +25,7 @@ fn make_anagram_sets(words: Vec<String>) -> HashSet<Vec<String>> {
         match map.get_mut(&key) {
             Some(v) => {
                 v.insert(word);
-            },
+            }
             None => {
                 let mut vv = HashSet::<String>::new();
                 vv.insert(word);
@@ -61,9 +61,11 @@ fn get_squares() -> HashMap<i32, Vec<Vec<char>>> {
     let upper = (1000000000 as f32).sqrt() as i64;
 
     for i in lower..upper {
-        let sq = i*i;
+        let sq = i * i;
         let key = (sq as f32).log10() as i32 + 1;
-        res.get_mut(&key).unwrap().push(sq.to_string().chars().collect());
+        res.get_mut(&key)
+            .unwrap()
+            .push(sq.to_string().chars().collect());
     }
     res
 }
@@ -73,7 +75,7 @@ fn get_allowable_square(n: Vec<char>) -> Option<i64> {
         None
     } else {
         let n: String = n.iter().collect();
-        let n: i64 =  n.parse::<i64>().unwrap();
+        let n: i64 = n.parse::<i64>().unwrap();
         let root: i64 = (n as f64).sqrt() as i64;
         if root * root == n {
             Some(n)
@@ -83,7 +85,7 @@ fn get_allowable_square(n: Vec<char>) -> Option<i64> {
     }
 }
 
-fn get_valid_encoding(word: String, digits: Vec<char>) -> Option<HashMap<char,char>> {
+fn get_valid_encoding(word: String, digits: Vec<char>) -> Option<HashMap<char, char>> {
     let mut encoding: HashMap<char, char> = HashMap::new();
     let mut rev_encoding: HashMap<char, char> = HashMap::new();
 
@@ -96,7 +98,7 @@ fn get_valid_encoding(word: String, digits: Vec<char>) -> Option<HashMap<char,ch
                 if val != *existing_val {
                     return None;
                 }
-            },
+            }
             None => {
                 encoding.insert(key, val);
             }
@@ -106,7 +108,7 @@ fn get_valid_encoding(word: String, digits: Vec<char>) -> Option<HashMap<char,ch
                 if key != *existing_key {
                     return None;
                 }
-            },
+            }
             None => {
                 rev_encoding.insert(val, key);
             }
@@ -128,15 +130,17 @@ fn get_valid_encoded_square(word: String, encoding: HashMap<char, char>) -> Opti
     match get_allowable_square(candidate_sq) {
         Some(square) => {
             return Some(square);
-        },
+        }
         None => {
             return None;
         }
     }
-
 }
 
-fn find_anagramic_squares(anagram_sets: HashSet<Vec<String>>, squares_map: HashMap<i32, Vec<Vec<char>>>) {
+fn find_anagramic_squares(
+    anagram_sets: HashSet<Vec<String>>,
+    squares_map: HashMap<i32, Vec<Vec<char>>>,
+) {
     for set in anagram_sets {
         println!("{:?}", set);
         for i in 0..set.len() - 1 {
@@ -145,16 +149,15 @@ fn find_anagramic_squares(anagram_sets: HashSet<Vec<String>>, squares_map: HashM
             for digits in squares_map.get(&l).unwrap() {
                 match get_valid_encoding(word.to_string(), digits.to_vec()) {
                     Some(encoding) => {
-                        match get_valid_encoded_square(set[i+1].to_string(), encoding) {
+                        match get_valid_encoded_square(set[i + 1].to_string(), encoding) {
                             Some(square) => {
                                 let ss: String = digits.iter().collect();
                                 let ss: i64 = ss.parse().unwrap();
                                 println!("{}, {}", square, ss);
-                            },
-                            None => {
                             }
+                            None => {}
                         }
-                    },
+                    }
                     None => {
                         continue;
                     }
@@ -191,7 +194,13 @@ mod tests {
 
     #[test]
     fn test_make_anagram_vecs() {
-        let input = vec!["oof".to_string(), "bar".to_string(), "bra".to_string(), "race".to_string(), "care".to_string()];
+        let input = vec![
+            "oof".to_string(),
+            "bar".to_string(),
+            "bra".to_string(),
+            "race".to_string(),
+            "care".to_string(),
+        ];
 
         let mut expect: HashSet<Vec<String>> = HashSet::new();
         expect.insert(vec!["bar".to_string(), "bra".to_string()]);
@@ -202,23 +211,37 @@ mod tests {
 
     #[test]
     fn test_make_the_map_of_sets() {
-        let input = vec!["oof".to_string(), "bar".to_string(), "bra".to_string()]; 
-  
+        let input = vec!["oof".to_string(), "bar".to_string(), "bra".to_string()];
+
         let mut output: HashMap<String, HashSet<String>> = HashMap::new();
-        output.insert("foo".to_string(), vec!["oof".to_string()].into_iter().collect());
-        output.insert("abr".to_string(), vec!["bra".to_string(), "bar".to_string()].into_iter().collect());
-        
+        output.insert(
+            "foo".to_string(),
+            vec!["oof".to_string()].into_iter().collect(),
+        );
+        output.insert(
+            "abr".to_string(),
+            vec!["bra".to_string(), "bar".to_string()]
+                .into_iter()
+                .collect(),
+        );
+
         assert_eq!(_make_the_map_of_sets(input), output);
-            
     }
 
     #[test]
     fn test_find_the_word_sets() {
         let mut input: HashMap<String, HashSet<String>> = HashMap::new();
-        input.insert("foo".to_string(), vec!["oof".to_string()].into_iter().collect());
-        input.insert("abr".to_string(), vec!["bra".to_string(), "bar".to_string()].into_iter().collect());
+        input.insert(
+            "foo".to_string(),
+            vec!["oof".to_string()].into_iter().collect(),
+        );
+        input.insert(
+            "abr".to_string(),
+            vec!["bra".to_string(), "bar".to_string()]
+                .into_iter()
+                .collect(),
+        );
 
         assert_eq!(_find_the_word_sets(input).len(), 1);
     }
-        
 }
