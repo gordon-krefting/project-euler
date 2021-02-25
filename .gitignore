@@ -1,4 +1,5 @@
 euler.sublime*
 *.swp
+.vscode
 target/
 Cargo.lock
