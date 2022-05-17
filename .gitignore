@@ -3,3 +3,4 @@ euler.sublime*
 .vscode
 target/
 Cargo.lock
+.DS_Store
