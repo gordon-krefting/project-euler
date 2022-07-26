@@ -1,7 +1,10 @@
 package main
 
-import "fmt"
-import "project-euler/golib/stringutil"
+import (
+	"fmt"
+
+	"krefting.org/stringutil"
+)
 
 func main() {
 	fmt.Println(stringutil.Reverse("Hey"))
