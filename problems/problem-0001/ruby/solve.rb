@@ -4,14 +4,12 @@
 #
 # Find the sum of all the multiples of 3 or 5 below 1000.
 
-n = 1000
-
-sum = 0
-
-for i in 1..n - 1
-  if i % 3 == 0 || i % 5 == 0
-    sum += i
+def fizz_buzz(limit)
+  sum = 0
+  (1...limit).each do |i|
+    sum += i if i % 3 == 0 || i % 5 == 0
   end
+  sum
 end
 
-puts sum
+puts fizz_buzz(1000) if __FILE__ == $0
