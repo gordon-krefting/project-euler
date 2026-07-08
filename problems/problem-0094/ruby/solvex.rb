@@ -15,7 +15,7 @@
 #   https://en.wikipedia.org/wiki/Integer_triangle#Isosceles_Heronian_triangles
 #   https://en.wikipedia.org/wiki/Coprime_integers#Generating_all_coprime_pairs
 #   http://forum.projecteuler.net/viewtopic.php?f=16&t=928
-require_relative "../lib/incrementor.rb"
+require_relative "../../../shared/ruby/incrementor.rb"
 require "logger"
 
 $log = Logger.new STDOUT

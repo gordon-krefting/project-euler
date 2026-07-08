@@ -25,8 +25,8 @@
 # number of primes for consecutive values of n, starting with n = 0.
 # -----------------------------------------------------------------------------------------------------
 
-require_relative "../lib/sieve.rb"
-require_relative "../lib/incrementor.rb"
+require_relative "../../shared/ruby/sieve.rb"
+require_relative "../../shared/ruby/incrementor.rb"
 
 init_primes(150000)
 

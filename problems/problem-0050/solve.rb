@@ -12,7 +12,7 @@
 # Which prime, below one-million, can be written as the sum of the most consecutive primes?
 #
 # ---------------------------------------------------------------------------------------------------------------------
-require_relative "../lib/primes"
+require_relative "../../shared/ruby/primes"
 
 limit = 1000000
 

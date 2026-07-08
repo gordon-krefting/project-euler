@@ -12,8 +12,8 @@
 # What 12-digit number do you form by concatenating the three terms in this sequence?
 #
 # ---------------------------------------------------------------------------------------------------------------------
-require_relative "../lib/primes"
-require_relative "../lib/util"
+require_relative "../../shared/ruby/primes"
+require_relative "../../shared/ruby/util"
 require "set"
 
 prime = Primes.new(10000)

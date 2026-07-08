@@ -17,8 +17,8 @@
 # 
 # Using string concat is much easier, but very slow. What's the best way?
 
-require_relative "../lib/incrementor.rb"
-require_relative "../lib/util.rb"
+require_relative "../../shared/ruby/incrementor.rb"
+require_relative "../../shared/ruby/util.rb"
 
 overall_length = 0
 checkpoints = [1,10,100,1000,10000,100000,1000000]

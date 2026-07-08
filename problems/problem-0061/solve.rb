@@ -23,7 +23,7 @@
 #
 # ---------------------------------------------------------------------------------------------------------------------
 
-require_relative "../lib/incrementor"
+require_relative "../../shared/ruby/incrementor"
 
 def build_values
   r = []

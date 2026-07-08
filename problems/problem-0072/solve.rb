@@ -21,7 +21,7 @@
 #
 # There's a section in there on computing the length
 #
-require "../lib/primes"
+require_relative "../../shared/ruby/primes"
 
 $primes = Primes.new(200000)
 

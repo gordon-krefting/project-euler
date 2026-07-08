@@ -19,8 +19,8 @@
 #
 # ---------------------------------------------------------------------------------------------------------------------
 
-require_relative "../lib/primes"
-require_relative "../lib/incrementor"
+require_relative "../../shared/ruby/primes"
+require_relative "../../shared/ruby/incrementor"
 
 primes = Primes.new(1000000)
 

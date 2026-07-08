@@ -30,7 +30,7 @@
 # them will match: x² − Dy² = 1. That x is the one we're talking about.
 #
 require "set"
-require_relative "../lib/incrementor"
+require_relative "../../shared/ruby/incrementor"
 
 class Square_Root_Expander
 

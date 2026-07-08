@@ -21,7 +21,7 @@
 #      φ(p1 x p2) = (p1 - 1) x (p2 - 1)
 #
 #
-require "../lib/primes"
+require_relative "../../shared/ruby/primes"
 
 $max_n = 10**7
 

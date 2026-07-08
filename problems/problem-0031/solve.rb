@@ -15,7 +15,7 @@
 # better looping....
 #
 
-require_relative "../lib/incrementor.rb"
+require_relative "../../shared/ruby/incrementor.rb"
 require "logger"
 
 $log = Logger.new STDOUT

@@ -18,7 +18,7 @@
 # 
 # Even if it's faster... looks like O(n^2). Ick.
 #
-require_relative "../lib/primes"
+require_relative "../../shared/ruby/primes"
 require "set"
 
 $primes = Primes.new(5000)

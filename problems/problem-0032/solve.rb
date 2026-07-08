@@ -19,7 +19,7 @@
 #  faster is_pandigital function (not using strings?)
 #
 require "set"
-require_relative "../lib/incrementor.rb"
+require_relative "../../shared/ruby/incrementor.rb"
 
 class Result
 	

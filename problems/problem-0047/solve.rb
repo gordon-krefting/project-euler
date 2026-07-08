@@ -14,8 +14,8 @@
 # Find the first four consecutive integers to have four distinct prime factors. What is the first of these numbers?
 #
 # ---------------------------------------------------------------------------------------------------------------------
-require_relative "../lib/primes"
-require_relative "../lib/incrementor"
+require_relative "../../shared/ruby/primes"
+require_relative "../../shared/ruby/incrementor"
 
 require "logger"
 

@@ -12,8 +12,8 @@
 # digit, is part of an eight prime value family.
 #
 # ---------------------------------------------------------------------------------------------------------------------
-require_relative "../lib/incrementor.rb"
-require_relative "../lib/sieve.rb"
+require_relative "../../shared/ruby/incrementor.rb"
+require_relative "../../shared/ruby/sieve.rb"
 require "logger"
 
 $log = Logger.new STDOUT

@@ -6,7 +6,7 @@
 # Find the smallest cube for which exactly five permutations of its digits are cube.
 #
 # ---------------------------------------------------------------------------------------------------------------------
-require "../lib/incrementor"
+require_relative "../../shared/ruby/incrementor"
 
 def make_key(n)
   n.to_s.split("").sort.join

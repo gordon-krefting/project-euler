@@ -9,7 +9,7 @@
 #
 # ---------------------------------------------------------------------------------------------------------------------
 
-require_relative "../lib/incrementor"
+require_relative "../../shared/ruby/incrementor"
 
 if __FILE__ == $0
 
