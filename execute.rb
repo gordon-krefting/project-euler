@@ -9,10 +9,11 @@
 #   ./execute.rb 27 ruby test     runs the tests directly, no prompts
 
 require 'open3'
+require 'tmpdir'
 
 ROOT = __dir__
 PROBLEMS_DIR = File.join(ROOT, "problems")
-LANGUAGES = %w[go python ruby rust]
+LANGUAGES = %w[c go haskell python ruby rust]
 ACTIONS = %w[run test]
 
 def problem_dirs
@@ -52,6 +53,13 @@ def run_command(problem_dir, lang)
   when "python"
     return nil unless File.exist?(File.join(dir, "solve.py"))
     [dir, %w[python3 solve.py]]
+  when "haskell"
+    return nil unless File.exist?(File.join(dir, "solve.hs"))
+    [dir, %w[runghc solve.hs]]
+  when "c"
+    return nil unless File.exist?(File.join(dir, "solve.c")) && File.exist?(File.join(dir, "main.c"))
+    bin = File.join(Dir.tmpdir, "pe_c_run_#{Process.pid}")
+    [dir, ["sh", "-c", "cc solve.c main.c -o #{bin} && #{bin}"]]
   end
 end
 
@@ -71,6 +79,13 @@ def test_command(problem_dir, lang)
   when "python"
     return nil unless File.exist?(File.join(dir, "test_solve.py"))
     [dir, %w[python3 test_solve.py -v]]
+  when "haskell"
+    return nil unless File.exist?(File.join(dir, "test_solve.hs"))
+    [dir, %w[runghc test_solve.hs]]
+  when "c"
+    return nil unless File.exist?(File.join(dir, "test_solve.c")) && File.exist?(File.join(dir, "solve.c"))
+    bin = File.join(Dir.tmpdir, "pe_c_test_#{Process.pid}")
+    [dir, ["sh", "-c", "cc solve.c test_solve.c -o #{bin} && #{bin}"]]
   end
 end
 
