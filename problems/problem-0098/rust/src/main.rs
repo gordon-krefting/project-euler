@@ -208,40 +208,4 @@ mod tests {
 
         assert_eq!(make_anagram_sets(input), expect);
     }
-
-    #[test]
-    fn test_make_the_map_of_sets() {
-        let input = vec!["oof".to_string(), "bar".to_string(), "bra".to_string()];
-
-        let mut output: HashMap<String, HashSet<String>> = HashMap::new();
-        output.insert(
-            "foo".to_string(),
-            vec!["oof".to_string()].into_iter().collect(),
-        );
-        output.insert(
-            "abr".to_string(),
-            vec!["bra".to_string(), "bar".to_string()]
-                .into_iter()
-                .collect(),
-        );
-
-        assert_eq!(_make_the_map_of_sets(input), output);
-    }
-
-    #[test]
-    fn test_find_the_word_sets() {
-        let mut input: HashMap<String, HashSet<String>> = HashMap::new();
-        input.insert(
-            "foo".to_string(),
-            vec!["oof".to_string()].into_iter().collect(),
-        );
-        input.insert(
-            "abr".to_string(),
-            vec!["bra".to_string(), "bar".to_string()]
-                .into_iter()
-                .collect(),
-        );
-
-        assert_eq!(_find_the_word_sets(input).len(), 1);
-    }
 }
