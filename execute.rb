@@ -13,7 +13,7 @@ require 'tmpdir'
 
 ROOT = __dir__
 PROBLEMS_DIR = File.join(ROOT, "problems")
-LANGUAGES = %w[c go haskell python ruby rust]
+LANGUAGES = %w[c go haskell lisp python ruby rust]
 ACTIONS = %w[run test]
 
 def problem_dirs
@@ -60,6 +60,9 @@ def run_command(problem_dir, lang)
     return nil unless File.exist?(File.join(dir, "solve.c")) && File.exist?(File.join(dir, "main.c"))
     bin = File.join(Dir.tmpdir, "pe_c_run_#{Process.pid}")
     [dir, ["sh", "-c", "cc solve.c main.c -o #{bin} && #{bin}"]]
+  when "lisp"
+    return nil unless File.exist?(File.join(dir, "solve.lisp"))
+    [dir, %w[sbcl --script solve.lisp]]
   end
 end
 
@@ -86,6 +89,9 @@ def test_command(problem_dir, lang)
     return nil unless File.exist?(File.join(dir, "test_solve.c")) && File.exist?(File.join(dir, "solve.c"))
     bin = File.join(Dir.tmpdir, "pe_c_test_#{Process.pid}")
     [dir, ["sh", "-c", "cc solve.c test_solve.c -o #{bin} && #{bin}"]]
+  when "lisp"
+    return nil unless File.exist?(File.join(dir, "test-solve.lisp"))
+    [dir, %w[sbcl --script test-solve.lisp]]
   end
 end
 
