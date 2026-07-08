@@ -6,4 +6,3 @@ target/
 
 # go build output (binary is named after the module, e.g. problem-0001)
 problems/*/go/problem-[0-9][0-9][0-9][0-9]
-problems/problem-[0-9][0-9][0-9][0-9]/problem-[0-9][0-9][0-9][0-9]
