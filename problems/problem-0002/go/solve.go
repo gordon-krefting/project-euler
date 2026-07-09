@@ -3,9 +3,12 @@ package main
 import "fmt"
 
 func main() {
+	fmt.Println(EvenFibonacciSum(4000000))
+}
+
+func EvenFibonacciSum(limit int) int {
 	a, b := 1, 1
 	sum := 0
-	limit := 4000000
 
 	for b < limit {
 		t := a + b
@@ -15,5 +18,5 @@ func main() {
 			sum += a
 		}
 	}
-	fmt.Println(sum)
+	return sum
 }
