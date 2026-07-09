@@ -1,0 +1,31 @@
+AllCops:
+  TargetRubyVersion: 3.4
+  NewCops: enable
+  SuggestExtensions: false
+
+# These are small, self-contained Project Euler scripts, not a library —
+# skip conventions aimed at gems/apps.
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 30
+
+Metrics/AbcSize:
+  Max: 25
+
+Metrics/CyclomaticComplexity:
+  Max: 10
+
+# Problem statements are pasted verbatim as header comments and often run
+# long — don't flag those, only actual code lines.
+Layout/LineLength:
+  AllowedPatterns: ['\A\s*#']
+
+# Existing code overwhelmingly uses double quotes; match that instead of
+# demanding a repo-wide rewrite.
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
