@@ -13,12 +13,12 @@
 # What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed in the same way?
 
 def solve(n)
-	total = 1
-	(3...n+1).step(2) do |x|
-		# Upper right corner is x**, the other corners are each x-1 less. Simplify and we've got:
-		total += 4*x**2 - 6*x + 6
-	end
-	return total
+  total = 1
+  (3...(n + 1)).step(2) do |x|
+    # Upper right corner is x**, the other corners are each x-1 less. Simplify and we've got:
+    total += (4 * (x**2)) - (6 * x) + 6
+  end
+  total
 end
 
 puts "Total:#{solve(1001)}"
