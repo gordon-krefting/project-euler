@@ -1,7 +1,7 @@
 package main
 
 import "fmt"
-import "io/ioutil"
+import "os"
 import "strings"
 import "log"
 
@@ -22,7 +22,7 @@ func main() {
 }
 
 func ReadMatrix(filename string) [][]string {
-	rawcontent, err := ioutil.ReadFile(filename)
+	rawcontent, err := os.ReadFile(filename)
 	if err != nil {
 		log.Fatal(err)
 	}
