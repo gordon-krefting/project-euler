@@ -2,15 +2,37 @@
 
 import unittest
 
-from solve import characters_saved, integer_to_roman, roman_to_integer
+from solve import (
+    characters_saved,
+    integer_to_roman,
+    minimized_roman,
+    roman_to_integer,
+)
 
 
 class TestSolve(unittest.TestCase):
     def test_roman_to_integer(self):
+        self.assertEqual(6, roman_to_integer("VI"))
         self.assertEqual(16, roman_to_integer("VIIIIIIIIIII"))
 
     def test_integer_to_roman(self):
         self.assertEqual("XVI", integer_to_roman(16))
+
+    def test_roman_to_integer_with_leading_subtractive_pair(self):
+        # Numerals whose minimal form opens with a subtractive pair
+        cases = [
+            ("IV", 4),
+            ("IX", 9),
+            ("XL", 40),
+            ("XC", 90),
+            ("CD", 400),
+            ("CM", 900),
+            ("CDXL", 440),
+            ("MCMXCIV", 1994),
+        ]
+        for roman, expected in cases:
+            with self.subTest(roman=roman):
+                self.assertEqual(expected, roman_to_integer(roman))
 
     def test_roman_to_integer_against_sampled_input(self):
         # Sampled at random from p089_roman.txt
@@ -47,6 +69,24 @@ class TestSolve(unittest.TestCase):
         for value, expected in cases:
             with self.subTest(value=value):
                 self.assertEqual(expected, integer_to_roman(value))
+
+    def test_minimized_roman_against_sampled_input(self):
+        # Same 10 entries, mapped to the characters saved by minimizing each
+        cases = [
+            ("MMMCCCLXXVI", 0),
+            ("MMMMCCLXXXX", 3),
+            ("MMDCCCCXVI", 3),
+            ("MMDCCLXXXII", 0),
+            ("MMDCXXI", 0),
+            ("MMCMLXIIII", 2),
+            ("DLXXXX", 3),
+            ("MMDCCXX", 0),
+            ("CCXVI", 0),
+            ("MMMDCI", 0),
+        ]
+        for roman, expected in cases:
+            with self.subTest(roman=roman):
+                self.assertEqual(expected, minimized_roman(roman))
 
     def test_characters_saved_against_sampled_input(self):
         # Same 10 entries sampled at random from p089_roman.txt

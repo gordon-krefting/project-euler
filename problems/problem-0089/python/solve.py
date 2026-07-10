@@ -1,18 +1,4 @@
 #!/usr/bin/python3
-#
-# Roman numerals
-# Problem 89
-#
-# For a number written in Roman numerals to be considered valid there are
-# basic rules which must be followed. Even though the rules allow some
-# numbers to be expressed in more than one way there is always a "best" way
-# of writing a particular number.
-#
-# The file p089_roman.txt contains one thousand numbers written in valid,
-# but not necessarily minimal, Roman numerals.
-#
-# Find the number of characters saved by writing each of these in their
-# minimal form.
 
 ROMAN_VALUES = {
     "I": 1,
@@ -24,21 +10,47 @@ ROMAN_VALUES = {
     "M": 1000,
 }
 
+INTEGER_VALUES = {
+    1000: "M",
+    900: "CM",
+    500: "D",
+    400: "CD",
+    100: "C",
+    90: "XC",
+    50: "L",
+    40: "XL",
+    10: "X",
+    9: "IX",
+    5: "V",
+    4: "IV",
+    1: "I",
+}
+
 
 def roman_to_integer(roman):
-    # TODO: sum the numeral's symbol values, accounting for subtractive pairs
-    pass
+    o = 0
+    for i in range(len(roman)):
+        if i == len(roman) - 1 or ROMAN_VALUES[roman[i]] >= ROMAN_VALUES[roman[i + 1]]:
+            o += ROMAN_VALUES[roman[i]]
+        else:
+            o -= ROMAN_VALUES[roman[i]]
+    return o
 
 
-def integer_to_roman(value):
-    # TODO: render `value` as its minimal Roman numeral representation
-    pass
+def integer_to_roman(integer_value):
+    o = ""
+    for value, numeral in INTEGER_VALUES.items():
+        count, remainder = divmod(integer_value, value)
+        o += numeral * count
+        integer_value = remainder
+    return o
 
+
+def minimized_roman(roman):
+    return len(roman) - len(integer_to_roman(roman_to_integer(roman)))
 
 def characters_saved(romans):
-    # TODO: sum the difference in length between each numeral and its minimal form
-    pass
-
+    return sum(minimized_roman(roman) for roman in romans)
 
 if __name__ == "__main__":
     with open("../p089_roman.txt") as f:
