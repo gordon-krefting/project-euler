@@ -28,29 +28,31 @@ INTEGER_VALUES = {
 
 
 def roman_to_integer(roman):
-    o = 0
+    result = 0
     for i in range(len(roman)):
         if i == len(roman) - 1 or ROMAN_VALUES[roman[i]] >= ROMAN_VALUES[roman[i + 1]]:
-            o += ROMAN_VALUES[roman[i]]
+            result += ROMAN_VALUES[roman[i]]
         else:
-            o -= ROMAN_VALUES[roman[i]]
-    return o
+            result -= ROMAN_VALUES[roman[i]]
+    return result
 
 
 def integer_to_roman(integer_value):
-    o = ""
+    result = ""
     for value, numeral in INTEGER_VALUES.items():
         count, remainder = divmod(integer_value, value)
-        o += numeral * count
+        result += numeral * count
         integer_value = remainder
-    return o
+    return result
 
 
 def minimized_roman(roman):
     return len(roman) - len(integer_to_roman(roman_to_integer(roman)))
 
+
 def characters_saved(romans):
     return sum(minimized_roman(roman) for roman in romans)
+
 
 if __name__ == "__main__":
     with open("../p089_roman.txt") as f:
