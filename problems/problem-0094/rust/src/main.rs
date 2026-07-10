@@ -23,12 +23,9 @@ fn main() {
             if perimeter > limit {
                 break 'theloop;
             }
-            match get_area(k, *factor) {
-                Some(area) => {
-                    println!("{}, {}, {} : Per:{}, Area:{}", a, b, c, perimeter, area);
-                    perimeter_total += perimeter;
-                }
-                None => {}
+            if let Some(area) = get_area(k, *factor) {
+                println!("{}, {}, {} : Per:{}, Area:{}", a, b, c, perimeter, area);
+                perimeter_total += perimeter;
             }
         }
     }
