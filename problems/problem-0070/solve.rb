@@ -6,11 +6,11 @@
 # Euler's Totient function, φ(n) [sometimes called the phi function], is used to determine the number of positive
 # numbers less than or equal to n which are relatively prime to n. For example, as 1, 2, 4, 5, 7, and 8, are all less
 # than nine and relatively prime to nine, φ(9)=6.
-# 
+#
 # The number 1 is considered to be relatively prime to every positive number, so φ(1)=1.
-# 
+#
 # Interestingly, φ(87109)=79180, and it can be seen that 87109 is a permutation of 79180.
-# 
+#
 # Find the value of n, 1 < n < 10^7, for which φ(n) is a permutation of n and the ratio n/φ(n) produces a minimum.
 #
 # ---------------------------------------------------------------------------------------------------------------------
@@ -23,48 +23,38 @@
 #
 require_relative "../../shared/ruby/primes"
 
-$max_n = 10**7
-
-$primes = Primes.new($max_n/11)
-
-def φp(p1,p2)
-  (p1-1)*(p2-1)
+def totient_pair(prime1, prime2)
+  (prime1 - 1) * (prime2 - 1)
 end
 
-def is_permutation(x, y)
-  x.to_s.split("").sort == y.to_s.split("").sort
+def permutation?(val1, val2)
+  val1.to_s.chars.sort == val2.to_s.chars.sort
 end
 
-if __FILE__ == $0
-
-  limit = Math.sqrt($max_n)
+if __FILE__ == $PROGRAM_NAME
+  max_n = 10**7
+  primes = Primes.new(max_n / 11)
+  limit = Math.sqrt(max_n)
   min_f = 10
   special_n = -1
 
-  (0..$primes.primes.size-1).each {|i|
+  (0..(primes.primes.size - 1)).each do |i|
     # a little 'cheat' we need both primes to be near sqrt(max_n)
-    if $primes.primes[i] < 1009
-      next
-    end
-    if limit < $primes.primes[i]
-      break
-    end
-    (i..$primes.primes.size-1).each{|j|
-      product = $primes.primes[i] * $primes.primes[j]
-      tot = φp($primes.primes[i],$primes.primes[j])
-      f = product.to_f/tot.to_f
-      if f < min_f
-        if is_permutation(tot, product)
-          puts "#{$primes.primes[i]};#{$primes.primes[j]}: #{product} #{tot} #{f}"
-          min_f = f
-          special_n = product
-        end
+    next if primes.primes[i] < 1009
+    break if limit < primes.primes[i]
+
+    (i..(primes.primes.size - 1)).each do |j|
+      product = primes.primes[i] * primes.primes[j]
+      tot = totient_pair(primes.primes[i], primes.primes[j])
+      f = product.to_f / tot
+      if (f < min_f) && permutation?(tot, product)
+        min_f = f
+        special_n = product
       end
 
-      if product > $max_n
-        break
-      end
-    }
-  }
+      break if product > max_n
+    end
+  end
 
+  puts special_n
 end
