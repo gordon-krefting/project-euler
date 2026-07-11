@@ -1,23 +1,46 @@
 #!/usr/bin/python3
 # Truncatable primes
 # Problem 37
-# Stub -- see the Ruby solution in ../ruby/solve.rb for a working reference.
 
 
 def is_prime(n):
-    raise NotImplementedError
+    if n < 2:
+        return False
+    if n < 4:
+        return True
+    if n % 2 == 0:
+        return False
+    for divisor in range(3, int(n**0.5) + 1, 2):
+        if n % divisor == 0:
+            return False
+    return True
 
 
 def truncate_left(n):
-    raise NotImplementedError
+    return int(str(n)[1:])
 
 
 def truncate_right(n):
-    raise NotImplementedError
+    return n // 10
 
 
 def is_truncatable_prime(n):
-    raise NotImplementedError
+    if n < 10 or not is_prime(n):
+        return False
+
+    left = n
+    while left >= 10:
+        left = truncate_left(left)
+        if not is_prime(left):
+            return False
+
+    right = n
+    while right >= 10:
+        right = truncate_right(right)
+        if not is_prime(right):
+            return False
+
+    return True
 
 
 if __name__ == "__main__":
