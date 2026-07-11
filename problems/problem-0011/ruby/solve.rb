@@ -1,46 +1,43 @@
 #!/usr/bin/env ruby
+# Largest product in a grid
+# Problem 11
 
-$grid = Array.new
-File.readlines("../in.txt").each do |line|
-  $grid.push line.strip.split(/ /).collect { |s| s.to_i }
-end
+GRID = File.readlines("../in.txt").map { |line| line.split.map(&:to_i) }
 
 def across(row, col)
-  if (col >= $grid.length - 3)
-    return 0
-  end
-  $grid[row][col] * $grid[row][col + 1] * $grid[row][col + 2] * $grid[row][col + 3]
+  return 0 if col >= GRID.length - 3
+
+  GRID[row][col] * GRID[row][col + 1] * GRID[row][col + 2] * GRID[row][col + 3]
 end
 
 def down(row, col)
-  if (row >= $grid.length - 3)
-    return 0
-  end
-  $grid[row][col] * $grid[row + 1][col] * $grid[row + 2][col] * $grid[row + 3][col]
+  return 0 if row >= GRID.length - 3
+
+  GRID[row][col] * GRID[row + 1][col] * GRID[row + 2][col] * GRID[row + 3][col]
 end
 
 def diagonal(row, col)
-  if (row >= $grid.length - 3 || col >= $grid.length - 3)
-    return 0
-  end
-  $grid[row][col] * $grid[row + 1][col + 1] * $grid[row + 2][col + 2] * $grid[row + 3][col + 3]
+  return 0 if row >= GRID.length - 3 || col >= GRID.length - 3
+
+  GRID[row][col] * GRID[row + 1][col + 1] * GRID[row + 2][col + 2] * GRID[row + 3][col + 3]
 end
 
-def the_other_diagonal(row, col)
-  if (row >= $grid.length - 3 || col < 0)
-    return 0
-  end
-  $grid[row][col] * $grid[row + 1][col - 1] * $grid[row + 2][col - 2] * $grid[row + 3][col - 3]
+def anti_diagonal(row, col)
+  return 0 if row >= GRID.length - 3 || col < 3
+
+  GRID[row][col] * GRID[row + 1][col - 1] * GRID[row + 2][col - 2] * GRID[row + 3][col - 3]
 end
 
-values = Array.new
-for row in 0..$grid.length - 1
-  for col in 0..$grid[row].length - 1
-    values.push across row, col
-    values.push down row, col
-    values.push diagonal row, col
-    values.push the_other_diagonal row, col
+if __FILE__ == $PROGRAM_NAME
+  values = []
+  GRID.each_index do |row|
+    GRID[row].each_index do |col|
+      values.push across(row, col)
+      values.push down(row, col)
+      values.push diagonal(row, col)
+      values.push anti_diagonal(row, col)
+    end
   end
-end
 
-puts values.max
+  puts values.max
+end
